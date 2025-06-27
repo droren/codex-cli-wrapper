@@ -22,6 +22,23 @@ workflow provided by `codex-cli`.
 
 ## Usage scenarios
 
+### Interactive mode
+Running the wrapper with no prompt will start `codex` in interactive mode. Any commands suggested by the model will run automatically in `full-auto` mode or on request when using `ask` mode.
+
+```bash
+# full-auto interactive session
+./codex-cli-wrapper
+
+# ask mode interactive session
+./codex-cli-wrapper --ask
+```
+
+You can combine the interactive mode with other flags such as `--dry-run` to preview the actions:
+
+```bash
+./codex-cli-wrapper --dry-run --ask
+```
+
 ### 1. Local model
 When using a local model (e.g. Ollama) no extra flags are required. Simply run:
 

@@ -1,0 +1,30 @@
+{
+  "name": "codex-cli-wrapper",
+  "version": "1.0.0",
+  "description": "`codex-cli-wrapper` is a small helper around [codex-cli](https://github.com/openai/codex) to make local usage easier and to ensure every command proposed by the LLM is actually executed. The wrapper works with both OpenAI hosted models and local providers such as [Ollama](https://ollama.ai).",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.5",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "eslint": "^9.29.0",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "bin": {
+    "codex-cli-wrapper": "dist/index.js"
+  }
+}
