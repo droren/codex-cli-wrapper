@@ -17,8 +17,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run type-check
-      - run: npm run build
-      - run: npm test
+      - name: Detect non-comment code changes
+        id: changes
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.sha }}
+          diff_lines=$(git diff --unified=0 ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | \
+            grep -E '^[+-](?![+-])' | \
+            grep -vE '^[+-]\s*(//|#|/\*|\*|<!--)' | wc -l)
+          if [ "$diff_lines" -gt 0 ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changes.outputs.run == 'true'
+        run: npm install
+      - if: steps.changes.outputs.run == 'true'
+        run: npm run lint
+      - if: steps.changes.outputs.run == 'true'
+        run: npm run type-check
+      - if: steps.changes.outputs.run == 'true'
+        run: npm run build
+      - if: steps.changes.outputs.run == 'true'
+        run: npm test
+      - if: steps.changes.outputs.run == 'false'
+        run: echo "Only comment or documentation changes detected. Skipping checks."
