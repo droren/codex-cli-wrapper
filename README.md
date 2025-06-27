@@ -9,6 +9,24 @@ You must have `codex-cli` installed and accessible in your environment. See the
 [official codex-cli repository](https://github.com/openai/codex) for
 installation instructions.
 
+## Installation
+Clone this repository and install the dependencies:
+
+```bash
+git clone https://github.com/yourname/codex-cli-wrapper.git
+cd codex-cli-wrapper
+npm install
+npm run build
+```
+
+To use the wrapper globally you can link the package:
+
+```bash
+npm link
+```
+
+After linking you can run `codex-cli-wrapper` from anywhere on your system.
+
 ## Main purpose
 The wrapper simplifies interaction with `codex-cli` by providing a consistent
 entry point and optional environment configuration. It allows advanced usage
@@ -19,6 +37,28 @@ approving model suggestions.
 By default the wrapper assumes you have a local instance of Ollama running. The
 wrapper forwards all requests to that local model while still handling the CLI
 workflow provided by `codex-cli`.
+
+### Example codex configuration
+Create `~/.codex/config.json` with the following content to connect
+`codex-cli` to a local Ollama instance running the `qwen2.5-coder` model
+on your Mac mini M4 (16 GB memory):
+
+```json
+{
+  "provider": "ollama",
+  "model": "qwen2.5-coder",
+  "providers": {
+    "ollama": {
+      "name": "Ollama",
+      "baseURL": "http://localhost:11434/v1",
+      "envKey": "OLLAMA_API_KEY"
+    }
+  }
+}
+```
+
+With this configuration the wrapper will use your local model by default while
+retaining the usual `codex-cli` workflow.
 
 ## Usage scenarios
 
