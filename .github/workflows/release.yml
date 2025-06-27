@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run build
+      - run: npm test
+      - name: Archive dist
+        run: |
+          tar -czf codex-cli-wrapper.tar.gz dist
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: codex-cli-wrapper.tar.gz
+          generate_release_notes: true
