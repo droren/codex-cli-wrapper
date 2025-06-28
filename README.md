@@ -4,6 +4,10 @@
 ensure every command proposed by the LLM is actually executed. The wrapper works
 with both OpenAI hosted models and local providers such as [Ollama](https://ollama.ai).
 
+# NOTE ! 
+THIS IS MAINLY GENERATED CODE, DO NOT EXPECT IT TO WORK AT THIS TIME, EXPERIMENTING WITH
+GENERATION OF BASE CODE. 
+
 ## Requirements
 You must have `codex-cli` installed and accessible in your environment. See the
 [official codex-cli repository](https://github.com/openai/codex) for
